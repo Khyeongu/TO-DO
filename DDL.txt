@@ -2,6 +2,28 @@ DROP TABLE alarm purge;
 DROP TABLE member purge;
 DROP TABLE schedule purge;
 
+DROP SEQUENCE member_id_seq;
+DROP SEQUENCE alarm_id_seq;
+DROP SEQUENCE schedule_id_seq;
+
+CREATE SEQUENCE member_id_seq
+    INCREMENT BY 1
+    START WITH 1
+    NOCACHE
+;
+
+CREATE SEQUENCE alarm_id_seq
+    INCREMENT BY 1
+    START WITH 1
+    NOCACHE
+;
+
+CREATE SEQUENCE schedule_id_seq
+    INCREMENT BY 1
+    START WITH 1
+    NOCACHE
+;
+
 CREATE TABLE alarm (
     no         NUMBER NOT NULL,
     time       DATE NOT NULL,

@@ -1,0 +1,28 @@
+create or replace procedure insert_member
+(
+    p_id in member.id%type
+    , p_pw in member.pw%type
+    , p_name in member.name%type
+)
+is
+begin
+    insert into MEMBER (no, id, pw, name)
+    values (member_id_seq.NEXTVAL, p_id, p_pw, p_name);
+    commit;
+end;
+/
+
+CREATE OR REPLACE PROCEDURE select_member_info (
+    p_id member.id%type
+    , p_pw member.pw%type
+    , p_name OUT member.name%type
+    )
+    IS
+    BEGIN
+    SELECT name INTO p_name
+    FROM member
+    WHERE id=p_id 
+        AND
+        pw=p_pw;
+END;
+/
