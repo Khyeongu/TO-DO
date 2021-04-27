@@ -1,0 +1,40 @@
+DROP TABLE alarm purge;
+DROP TABLE member purge;
+DROP TABLE schedule purge;
+
+CREATE TABLE alarm (
+    no         NUMBER NOT NULL,
+    time       DATE NOT NULL,
+    title      VARCHAR2(50) NOT NULL,
+    member_no  NUMBER NOT NULL
+);
+
+ALTER TABLE alarm ADD CONSTRAINT alarm_pk PRIMARY KEY ( no );
+
+CREATE  TABLE member (
+    no    NUMBER NOT NULL,
+    id    VARCHAR2(30) NOT NULL,
+    pw    VARCHAR2(30) NOT NULL,
+    name  VARCHAR2(20) NOT NULL
+);
+
+ALTER TABLE member ADD CONSTRAINT member_pk PRIMARY KEY ( no );
+
+CREATE TABLE schedule (
+    no          NUMBER NOT NULL,
+    start_date  DATE NOT NULL,
+    end_date    DATE NOT NULL,
+    title       VARCHAR2(100) NOT NULL,
+    content     VARCHAR2(500),
+    member_no   NUMBER NOT NULL
+);
+
+ALTER TABLE schedule ADD CONSTRAINT schedule_pk PRIMARY KEY ( no );
+
+ALTER TABLE alarm
+    ADD CONSTRAINT alarm_member_fk FOREIGN KEY ( member_no )
+        REFERENCES member ( no );
+
+ALTER TABLE schedule
+    ADD CONSTRAINT schedule_member_fk FOREIGN KEY ( member_no )
+        REFERENCES member ( no );
