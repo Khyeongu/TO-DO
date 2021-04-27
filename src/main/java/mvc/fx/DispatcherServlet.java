@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(
-	urlPatterns = {"/member/*"},
+	urlPatterns = {"/member/*", "/todo/*"},
 	loadOnStartup = 10)
 public class DispatcherServlet extends HttpServlet {
 	

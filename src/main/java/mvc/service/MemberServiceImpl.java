@@ -21,4 +21,9 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.insertMember(memberDTO);
 	}
 
+	@Override
+	public boolean loginMember(MemberDTO memberDTO) throws Exception {
+		return memberDAO.loginCheck(memberDTO);
+	}
+
 }

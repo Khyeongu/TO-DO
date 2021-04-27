@@ -9,7 +9,8 @@
 </head>
 <body>
 <%
-	response.sendRedirect("member/register");
+	response.sendRedirect("todo/mainpage");
 %>
 </body>
+
 </html>
