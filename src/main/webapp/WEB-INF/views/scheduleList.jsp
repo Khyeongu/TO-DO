@@ -9,39 +9,46 @@
 	Calendar cal = Calendar.getInstance();
 %>
 
-<script type="text/javascript"
-	src="${context}/resources/js/buildCalendar.js">
 
 </script>
-
+<!-- <link rel="stylesheet" href="${context}/resources/css/calendar.css">  -->
 <head>
 <meta charset="UTF-8">
 <title>캘린더</title>
 </head>
-<body>
-	<div id="date">
-		<label id="year"><%=cal.get(Calendar.YEAR)%>년</label>
-		<button type="button" onClick="last_month_click()">&lt</button>
-		<label id="month"><%=cal.get(Calendar.MONTH) + 1%>월</label>
-		<button type="button" onCLick="next_month_click()">&gt</button>
-	</div>
-	<div id="wrap_calendar">
-		<table id="calendar" border="3" style="border-color: #FFFFFF">
-
-			<tr>
-				<td align="center"><font color="#F79DC2">일</td>
-				<td align="center">월</td>
-				<td align="center">화</td>
-				<td align="center">수</td>
-				<td align="center">목</td>
-				<td align="center">금</td>
-				<td align="center"><font color="skyblue">토</td>
-			</tr>
-		</table>
-	</div>
-
-	<script language="javascript" type="text/javascript">
-		buildCalendar();//
-	</script>
+<div class="container">
+  <div class="my-calendar clearfix">
+    <div class="clicked-date">
+      <div class="cal-day"></div>
+      <div class="cal-date"></div>
+    </div>
+    <div class="calendar-box">
+      <div class="ctr-box clearfix">
+        <button type="button" title="prev" class="btn-cal prev">
+        </button>
+        <span class="cal-month"></span>
+        <span class="cal-year"></span>
+        <button type="button" title="next" class="btn-cal next">
+        </button>
+      </div>
+      <table class="cal-table">
+        <thead>
+          <tr>
+            <th>S</th>
+            <th>M</th>
+            <th>T</th>
+            <th>W</th>
+            <th>T</th>
+            <th>F</th>
+            <th>S</th>
+          </tr>
+        </thead>
+        <tbody class="cal-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <!-- // .my-calendar -->
+  <script type="text/javascript" src="${context}/resources/js/buildCalendar.js"></script>
+</div>
 </body>
 </html>
