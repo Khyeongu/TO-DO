@@ -9,7 +9,7 @@
 </head>
 <body>
 <%
-	response.sendRedirect("todo/mainpage");
+	response.sendRedirect("todo/scheduleList");
 %>
 </body>
 

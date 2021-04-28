@@ -25,10 +25,16 @@ public class MemberRegisterAction extends AbstractController{
 		
 		ModelAndView mav = new ModelAndView();
 		try {
-			memberService.insertMember(memberDTO);
-			mav.setViewName("redirect:register");
+			boolean pass;
+			pass=memberService.insertMember(memberDTO);
+			if(pass) {
+				mav.setViewName("redirect:../todo/mainpage");
+				return mav;
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			mav.setViewName("redirect:register");
+			return mav;
 		}
 
 		

@@ -27,7 +27,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void insertMember(MemberDTO memberDTO) throws SQLException {
+	public boolean insertMember(MemberDTO memberDTO) throws SQLException {
 		StringBuffer sql = new StringBuffer();
 		sql.append("call insert_member(?, ?, ?)");
 
@@ -37,6 +37,10 @@ public class MemberDAOImpl implements MemberDAO {
 			ps.setString(2, memberDTO.getPw());
 			ps.setString(3, memberDTO.getName());
 			ps.executeUpdate();
+			
+			return true;
+		}catch(Exception e) {
+			return false;
 		}
 
 	}
