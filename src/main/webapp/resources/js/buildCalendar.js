@@ -43,9 +43,8 @@ function loadDate (date, dayIn) {
   document.querySelector('.cal-day').textContent = init.dayList[dayIn];
 }
 
-function selectDate(val){
-        var str = document.getElementsById('val').nodeValue;
-        alert(str);
+function selectDate(fullDate){
+        alert(fullDate);
     }
 
 /**
@@ -78,7 +77,7 @@ function loadYYMM (fullDate) {
         let fullDate = yy + '.' + init.addZero(mm + 1) + '.' + init.addZero(countDay + 1);
         trtd += '<td class="day';
         trtd += (markToday && markToday === countDay + 1) ? ' today" ' : '"';
-        trtd += `id=${countDay + 1} data-date="${countDay + 1}" data-fdate="${fullDate}" onclick="selectDate(${countDay + 1})">`;
+        trtd += `id=${countDay + 1} data-date="${countDay + 1}" data-fdate="${fullDate}" onclick="selectDate('${fullDate}')">`;
       }
       trtd += (startCount) ? ++countDay : '';
       if (countDay === lastDay.getDate()) { 
