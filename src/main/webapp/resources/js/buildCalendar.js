@@ -34,22 +34,19 @@ const init = {
   }
 };
 
-/**
- * @param {number} date
- * @param {number} dayIn
-*/
+
 function loadDate (date, dayIn) {
   document.querySelector('.cal-date').textContent = date;
   document.querySelector('.cal-day').textContent = init.dayList[dayIn];
 }
 
 function selectDate(fullDate){
-        alert(fullDate);
+		var target=document.getElementById("selectDate");
+		target.innerHTML="<input type='hidden' name='selectedDate' value="+fullDate+"><button class='btn_insertSchedule'>일정 추가</button>";
+    	
     }
 
-/**
- * @param {date} fullDate
- */
+
 function loadYYMM (fullDate) {
   let yy = fullDate.getFullYear();
   let mm = fullDate.getMonth();
@@ -57,7 +54,9 @@ function loadYYMM (fullDate) {
   let lastDay = init.getLastDay(yy, mm);
   let markToday;  // for marking today date
   
-  markToday = init.today.getDate();
+  if (mm === init.today.getMonth() && yy === init.today.getFullYear()) {
+    markToday = init.today.getDate();
+  }
 
   document.querySelector('.cal-month').textContent = init.monList[mm];
   document.querySelector('.cal-year').textContent = yy;
@@ -74,7 +73,7 @@ function loadYYMM (fullDate) {
       if (!startCount) {
         trtd += '<td>'
       } else {
-        let fullDate = yy + '.' + init.addZero(mm + 1) + '.' + init.addZero(countDay + 1);
+        let fullDate = yy + '-' + init.addZero(mm + 1) + '-' + init.addZero(countDay + 1);
         trtd += '<td class="day';
         trtd += (markToday && markToday === countDay + 1) ? ' today" ' : '"';
         trtd += `id=${countDay + 1} data-date="${countDay + 1}" data-fdate="${fullDate}" onclick="selectDate('${fullDate}')">`;
@@ -91,14 +90,12 @@ function loadYYMM (fullDate) {
 }
 
 
-
 const calBody = document.querySelector('.cal-body');
 const btnNext = document.querySelector('.btn-cal.next');
 const btnPrev = document.querySelector('.btn-cal.prev');
 
 loadYYMM(init.today);
 loadDate(init.today.getDate(), init.today.getDay());
-
 btnNext.addEventListener('click', () => loadYYMM(init.nextMonth()));
 btnPrev.addEventListener('click', () => loadYYMM(init.prevMonth()));
 

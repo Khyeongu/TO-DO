@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그인 및 회원가입</title>
 </head>
 <body>
 <%
-	response.sendRedirect("todo/scheduleList");
+	response.sendRedirect("todo/mainpage");
 %>
 </body>
 

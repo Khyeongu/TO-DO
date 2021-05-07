@@ -46,29 +46,33 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public boolean loginCheck(MemberDTO memberDTO) throws SQLException {
-		String sql = "{call select_member_info(?, ?, ?)}";
+	public MemberDTO loginCheck(MemberDTO memberDTO) throws SQLException {
+		String sql = "{call select_member_info(?, ?, ?, ?)}";
+		MemberDTO check_memberDTO = new MemberDTO();
 
 		try (Connection conn = dataSource.getConnection(); CallableStatement cs = conn.prepareCall(sql)) {
 			cs.setString(1, memberDTO.getId());
 			cs.setString(2, memberDTO.getPw());
-			cs.registerOutParameter(3, java.sql.Types.VARCHAR);
+			cs.registerOutParameter(3, java.sql.Types.NUMERIC);
+			cs.registerOutParameter(4, java.sql.Types.VARCHAR);
 
 			try {
 				cs.executeQuery();
-				System.out.println(cs.getString(3));
+				check_memberDTO.setId(memberDTO.getId());
+				check_memberDTO.setNo(cs.getInt(3));
+				check_memberDTO.setName(cs.getString(4));
 				if(cs.getString(3).length()!=0) {
-					return true;
+					return check_memberDTO;
 				}
 				else {
-					return false;
+					return null;
 				}
 			} catch (SQLException e) {
-				return false;
+				return null;
 			}
 
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
 	}
 }

@@ -8,8 +8,7 @@
 </head>
 <body>
 	<header>
-		<h1>서비스 네임</h1>
-		<p>계정을 생성해 주세요</p>
+		<h1>계정을 생성해 주세요</h1>
 	</header>
 	
 	<form action="MemberRegisterAction" method="post">

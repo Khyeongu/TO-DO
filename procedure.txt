@@ -15,14 +15,31 @@ end;
 CREATE OR REPLACE PROCEDURE select_member_info (
     p_id member.id%type
     , p_pw member.pw%type
+    , p_no OUT member.no%type
     , p_name OUT member.name%type
     )
     IS
     BEGIN
-    SELECT name INTO p_name
+    SELECT no, name INTO p_no, p_name
     FROM member
     WHERE id=p_id 
         AND
         pw=p_pw;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insert_schedule
+(
+    p_start_date schedule.start_date%type
+    , p_end_date schedule.end_date%type
+    , p_title schedule.title%type
+    , p_content schedule.content%type
+    , p_member_no schedule.member_no%type
+)
+IS
+BEGIN
+    INSERT INTO SCHEDULE (no, start_date, end_date, title, content, member_no)
+    VALUES (schedule_id_seq.NEXTVAL, p_start_date, p_end_date, p_title, p_content, p_member_no);
+    commit;
 END;
 /

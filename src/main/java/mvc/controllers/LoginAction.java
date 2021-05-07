@@ -2,6 +2,7 @@ package mvc.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mvc.fx.AbstractController;
 import mvc.fx.ModelAndView;
@@ -23,10 +24,12 @@ public class LoginAction extends AbstractController {
 		
 		ModelAndView mav = new ModelAndView();
 		try {
-			boolean pass;
-			pass=memberService.loginMember(memberDTO);
-			System.out.println(pass);
-			if(pass) {
+			MemberDTO check_memberDTO = new MemberDTO();
+			check_memberDTO = memberService.loginMember(memberDTO);
+			if(check_memberDTO != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("memberNo", check_memberDTO.getNo());
+				session.setAttribute("memberName", check_memberDTO.getName());
 				mav.setViewName("redirect:scheduleList");
 				return mav;
 			}

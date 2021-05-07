@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(
-	urlPatterns = {"/member/*", "/todo/*"},
+	urlPatterns = {"/member/*", "/todo/*", "/calendar/*"},
 	loadOnStartup = 10)
 public class DispatcherServlet extends HttpServlet {
 	
@@ -43,7 +43,7 @@ public class DispatcherServlet extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String action = requestURI.substring(contextPath.length());
-		//System.out.println(action);
+		System.out.println(requestURI);
 		
 		AbstractController controller = controllerMap.get(action);
 		ModelAndView mav = controller.handleRquestInternal(request, response);
@@ -58,7 +58,7 @@ public class DispatcherServlet extends HttpServlet {
 				for(String key : model.keySet()) {
 					request.setAttribute(key, model.get(key));
 				}
-				System.out.println(viewName);
+				//System.out.println(viewName);
 				RequestDispatcher dispatcher = request.getRequestDispatcher(viewName);
 				dispatcher.forward(request, response);
 			}

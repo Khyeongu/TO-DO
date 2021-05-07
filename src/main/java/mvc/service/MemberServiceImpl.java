@@ -3,6 +3,9 @@ package mvc.service;
 import mvc.models.MemberDAO;
 import mvc.models.MemberDAOImpl;
 import mvc.models.MemberDTO;
+import mvc.models.ScheduleDAO;
+import mvc.models.ScheduleDAOImpl;
+import mvc.models.ScheduleDTO;
 
 public class MemberServiceImpl implements MemberService{
 	private static final MemberService memberService = new MemberServiceImpl();
@@ -22,8 +25,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean loginMember(MemberDTO memberDTO) throws Exception {
+	public MemberDTO loginMember(MemberDTO memberDTO) throws Exception {
 		return memberDAO.loginCheck(memberDTO);
 	}
+
+	
 
 }
